@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento_Cep</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div class="card">
+        <h2>Via CEP - Borussia Dortmund</h2>
+    
+            <label form="cep" place></label>
+    <div>
+            <input id="campoCEP" placeholder="Digite o CEP (somente números)">
+    </div>
+    
+        <button onclick="consultarCEP()">Consultar</button>
+    
+    <div id="textoResultado"></div>
+    </div>
+    
+    <script>
+    function consultarCEP() {
+
+        // pega o valor digitado
+        const cep = document.getElementById("campoCEP").value;
+    
+        // consulta a API
+        fetch("https://viacep.com.br/ws/" + cep + "/json/")
+            .then(resposta => resposta.json())
+            .then(dados => {
+    
+                // mostra o resultado na tela
+                document.getElementById("textoResultado").innerText =
+                    "CEP: " + dados.cep + "\n" +
+                    "Logradouro: " + dados.logradouro + " - " +
+                    dados.complemento + "\n" +
+                    "Bairro: " + dados.bairro + "\n" +
+                    "Cidade: " + dados.localidade + "\n" +
+                    "Estado: " + dados.uf;
+    
+            });
+    }
+
+    </script>
+            
+</body>
+</html>
